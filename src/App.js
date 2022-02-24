@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
+import Navbar from './pages/Navbar';
+import Product from './pages/Product/Product';
+import AddProduct from './pages/Product/AddProduct';
+
+import axios from 'axios';
+import Login from './pages/Login';
+axios.defaults.baseURL = "http://localhost:8000/api/";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/products" component={Product} />
+            <Route path="/add-products" component={AddProduct} />
+          </Switch>
+        </Router>
     </div>
   );
 }
